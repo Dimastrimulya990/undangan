@@ -84,7 +84,7 @@
     width: 300px;
     background-color: rgba(245, 245, 220, 0.8); /* Nilai alpha 0.8 membuat latar belakang menjadi transparan */
     text-align: center;
-    padding: 20px;
+    /* padding: 50px; */
     margin: 20px auto;
     border-radius: 5px;
 }
@@ -180,10 +180,10 @@
 </head>
 <body>
     <video id="background-video" autoplay loop muted>
-        <source src="video.mp4" type="video/mp4">
+        <source src="../video/video.mp4" type="video/mp4">
     </video>
     <audio controls loop autoplay>
-        <source src="ms.mp3" type="audio/mpeg">
+        <source src="../music/ms.mp3" type="audio/mpeg">
     </audio>
     <div class="header">
         <h1>Undangan Pernikahan</h1>
@@ -220,13 +220,13 @@
                
           <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
             <div style="text-align: center;">
-                <img src="nn.png" alt="Foto Boby" style="display: block; margin: 0 auto; width: 150px; height: auto;">
+                <img src="../image/nn.png" alt="Foto Boby" style="display: block; margin: 0 auto; width: 150px; height: auto;">
                 <h2 style="font-family: 'Embassy BT', cursive; font-size: 40px; font-weight: bold;">Boby Alakadar</h2>
                 <p>Putra ke 10 dari bapak Sutejooo & Ibunda Hajiya.</p>
             </div>
             <p><span style="font-size: medium; font-family: 'Embassy BT'; font-size: 25px;">&</span></p>
             <div style="text-align: center;">
-                <img src="hn.jpg" alt="Foto Ayu" style="display: block; margin: 0 auto; width: 150px; height: auto;">
+                <img src="../image/hn.jpg" alt="Foto Ayu" style="display: block; margin: 0 auto; width: 150px; height: auto;">
                 <h2 style="font-family: 'Embassy BT', cursive; font-size: 40px; font-weight: bold;">Ayu Kharisma</h2>
                 <p>Putri ke 1 dari Bapak Andero & Ibunda Lia Ningsih</p>
             </div>
@@ -273,7 +273,10 @@
     
     <div id="denah-lokasi" class="page">
         <div class="content">
-            <h2>Denah Lokasi</h2>
+             <div style="text-align: center;">
+                <h2>Denah Lokasi</h2>
+            </div>
+            
             <div style="position: relative; overflow: hidden; padding-top: 56.25%;">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.414400525806!2d106.79724337395191!3d-6.208946160816907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f153a35426ef%3A0xf69c935a828d0d3d!2sGedung%20DPR%2FMPR%20RI!5e0!3m2!1sid!2sid!4v1684473913579!5m2!1sid!2sid"
                     width="100%" height="100%" style="position: absolute; top: 0; left: 0; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
