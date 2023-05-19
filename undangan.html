@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Undangan Pernikahan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            margin-top: -90px;
+            color:white;
+        }
+        
+        .content {
+    background-color: rgba(255, 219, 244, 0.1);
+    padding: 20px;
+    margin: 20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+    color: white;
+    max-height: 1000px; 
+    overflow-y: auto;
+}
+
+        
+        .navigation {
+            text-align: center;
+            /* margin-top: -110px; */
+        }
+        
+        .navigation a {
+            margin: 5px;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .navigation a.active {
+            background-color:#d40047;
+            color: #fff;
+        }
+        .form-container {
+            width: 300px;
+            margin: 0 auto;
+        }
+        
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="tel"],
+        .form-container select,
+        .form-container textarea,
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .guest-list {
+    width: 300px;
+    background-color: rgba(245, 245, 220, 0.8); /* Nilai alpha 0.8 membuat latar belakang menjadi transparan */
+    text-align: center;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 5px;
+}
+
+
+.guest-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.guest-list li {
+    margin-bottom: 5px;
+}
+
+    </style>
+    <script>
+        function showPage(pageId) {
+            // Menyembunyikan semua halaman
+            var pages = document.getElementsByClassName('page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+            
+            // Menampilkan halaman yang dipilih
+            var page = document.getElementById(pageId);
+            page.classList.add('active');
+            
+            // Menandai halaman navigasi yang aktif
+            var links = document.getElementsByTagName('a');
+            for (var j = 0; j < links.length; j++) {
+                links[j].classList.remove('active');
+            }
+            
+            var link = document.querySelector('a[data-page="' + pageId + '"]');
+            link.classList.add('active');
+        }
+        var guestCount = 0;
+        
+        function addGuest() {
+            var guestNameInput = document.getElementById('guest-name');
+            var guestEmailInput = document.getElementById('guest-email');
+            var guestPhoneInput = document.getElementById('guest-phone');
+            var guestAttendanceInput = document.getElementById('guest-attendance');
+            var guestMessageInput = document.getElementById('guest-message');
+            
+            var guestName = guestNameInput.value;
+            var guestEmail = guestEmailInput.value;
+            var guestPhone = guestPhoneInput.value;
+            var guestAttendance = guestAttendanceInput.value;
+            var guestMessage = guestMessageInput.value;
+            
+            if (guestName.trim() !== '') {
+                var guestList = document.getElementById('guest-list');
+                var listItem = document.createElement('li');
+                guestCount++;
+                listItem.innerHTML = `
+                    <strong>${guestCount}. ${guestName}</strong><br>
+                    Email: ${guestEmail}<br>
+                    Phone: ${guestPhone}<br>
+                    Attendance: ${guestAttendance}<br>
+                    Message: ${guestMessage}
+                `;
+                guestList.appendChild(listItem);
+                
+                guestNameInput.value = '';
+                guestEmailInput.value = '';
+                guestPhoneInput.value = '';
+                guestAttendanceInput.value = '';
+                guestMessageInput.value = '';
+                
+                showPage('daftar-tamu');
+            }
+        }
+        
+        function showPage(pageId) {
+            var pages = document.getElementsByClassName('page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].style.display = 'none';
+            }
+            
+            var page = document.getElementById(pageId);
+            page.style.display = 'block';
+            
+            var links = document.getElementsByTagName('a');
+            for (var j = 0; j < links.length; j++) {
+                links[j].classList.remove('active');
+            }
+            
+            var link = document.querySelector('a[data-page="' + pageId + '"]');
+            link.classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <video id="background-video" autoplay loop muted>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+    <audio controls loop autoplay>
+        <source src="ms.mp3" type="audio/mpeg">
+    </audio>
+    <div class="header">
+        <h1>Undangan Pernikahan</h1>
+    </div>
+    
+    <div class="navigation">
+        <a href="#" onclick="showPage('dashboard');" class="active" data-page="dashboard">Dashboard</a>
+        <a href="#" onclick="showPage('baca-doa');" data-page="baca-doa">Baca Doa</a>
+        <a href="#" onclick="showPage('alamat');" data-page="alamat">Alamat</a>
+        <a href="#" onclick="showPage('denah-lokasi');" data-page="denah-lokasi">Denah Lokasi</a>
+        <a href="#" onclick="showPage('tamu-undangan');" data-page="denah-lokasi">Daftar Isi Tamu Undangan</a>
+        <a href="#" onclick="showPage('daftar-tamu');" data-page="daftar-tamu">Daftar Tamu Undangan</a>
+        <!-- Tambahkan link untuk halaman lain di sini -->
+    </div>
+    
+    <div id="dashboard" class="page active">
+        <div class="content">
+            <h2>Assalamualaikum warahmatullahi wabarakatuh.</h2>
+            <p>
+                Dan nikahkanlah orang-orang yang masih membujang di antara kamu,
+                dan juga orang-orang yang layak (menikah) dari hamba-hamba sahayamu
+                yang laki-laki dan perempuan. Jika mereka miskin, Allah akan memberi
+                kemampuan kepada mereka dengan karunia-Nya. Dan Allah Mahaluas (pemberian-Nya),
+                Maha Mengetahui.
+            </p>
+            
+            <p>
+                Maha suci Allah yang telah menciptakan mahluk-Nya berpasang-pasangan.
+                Ya Allah, perkenankanlah kami merangkaikan kasih sayang yang Kau ciptakan
+                diantara putra-putri kami
+            </p>
+            
+            
+               
+          <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
+            <div style="text-align: center;">
+                <img src="nn.png" alt="Foto Boby" style="display: block; margin: 0 auto; width: 150px; height: auto;">
+                <h2 style="font-family: 'Embassy BT', cursive; font-size: 40px; font-weight: bold;">Boby Alakadar</h2>
+                <p>Putra ke 10 dari bapak Sutejooo & Ibunda Hajiya.</p>
+            </div>
+            <p><span style="font-size: medium; font-family: 'Embassy BT'; font-size: 25px;">&</span></p>
+            <div style="text-align: center;">
+                <img src="hn.jpg" alt="Foto Ayu" style="display: block; margin: 0 auto; width: 150px; height: auto;">
+                <h2 style="font-family: 'Embassy BT', cursive; font-size: 40px; font-weight: bold;">Ayu Kharisma</h2>
+                <p>Putri ke 1 dari Bapak Andero & Ibunda Lia Ningsih</p>
+            </div>
+        </div>
+            
+           
+            
+            <p>
+                Untuk melaksanankan syariat agama-Mu, mengikuti sunnah rasul-Mu
+                dalam membentuk rumah tangga Sakinah, Mawaddah Wa Rahmah dalam ikatan pernikahan
+                yang insya Allah akan diselenggarakan pada
+            </p>
+            
+            <p>
+                Hari: 15 September 2050<br>
+                Tempat: <a href="#" onclick="showPage('denah-lokasi');" data-page="denah-lokasi">Jalan Jalan</a>
+            </p>
+            
+            
+            <p>
+                Kami sangat berharap Bapak/Ibu/Saudara/Saudari berkenan menghadiri acara pernikahan ini. Terima kasih banyak atas perhatian yang diberikan.
+            </p>
+            
+            <p>
+                Wassalamualaikum warahmatullahi wabarakatuh.
+            </p>
+        </div>
+    </div>
+    
+    
+    <div id="baca-doa" class="page">
+        <div class="content">
+            <h2>Baca Doa</h2>
+            <!-- Tambahkan konten khusus halaman baca doa di sini -->
+        </div>
+    </div>
+    
+    <div id="alamat" class="page">
+        <div class="content">
+            <h2>Alamat</h2>
+            <!-- Tambahkan konten khusus halaman alamat di sini -->
+        </div>
+    </div>
+    
+    <div id="denah-lokasi" class="page">
+        <div class="content">
+            <h2>Denah Lokasi</h2>
+            <div style="position: relative; overflow: hidden; padding-top: 56.25%;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.414400525806!2d106.79724337395191!3d-6.208946160816907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f153a35426ef%3A0xf69c935a828d0d3d!2sGedung%20DPR%2FMPR%20RI!5e0!3m2!1sid!2sid!4v1684473913579!5m2!1sid!2sid"
+                    width="100%" height="100%" style="position: absolute; top: 0; left: 0; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!-- Tambahkan konten khusus halaman denah lokasi di sini -->
+            <!-- <iframe src="" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
+        </div>
+    </div>
+
+    <div id="tamu-undangan" class="page">
+        <div class="content">
+            <div style="text-align: center;">
+                <h2>Daftar Isi Tamu Undangan</h2>
+            </div>
+            
+            <!-- Tambahkan konten khusus halaman denah lokasi di sini -->
+            <div class="form-container">
+                <h2>Form Tamu Undangan</h2>
+                <form>
+                    <input type="text" id="guest-name" placeholder="Nama Tamu">
+                    <input type="email" id="guest-email" placeholder="Email">
+                    <input type="tel" id="guest-phone" placeholder="Telepon">
+                    <select id="guest-attendance">
+                        <option value="">Pilih Kehadiran</option>
+                        <option value="Saya Hadir">Saya Hadir</option>
+                        <option value="Saya Tidak Hadir">Saya Tidak Hadir</option>
+                    </select>
+                    <textarea id="guest-message" placeholder="Pesan"></textarea>
+                    <input type="submit" value="Daftar" onclick="event.preventDefault(); addGuest();">
+                </form>
+            </div>
+            
+        
+        </div>
+
+      
+    </div>
+    <div id="daftar-tamu" class="page" style="display: none;">
+        <div class="guest-list">
+            <h2>Daftar Tamu Undangan</h2>
+            <ul id="guest-list"></ul>
+        </div>
+    </div>
+    
+    <!-- <div class="navigation">
+        <a href="#" onclick="showPage('daftar-tamu');" data-page="daftar-tamu">Daftar Tamu Undangan</a>
+    </div> -->
+    
+    <script>
+        showPage('daftar-tamu');
+    </script>
+    <!-- Tambahkan halaman lain di sini -->
+    
+    <script>
+        showPage('dashboard'); // Menampilkan halaman dashboard secara default
+    </script>
+     <!-- <script>
+        // Memutar musik saat halaman dimuat
+        playMusic();
+    </script> -->
+
+
+</body>
+</html>
